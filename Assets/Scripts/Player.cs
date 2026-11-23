@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] float health;
-    [SerializeField] Transform head;
+    [SerializeField] float health = 100f;   // 100 PV au départ
+    [SerializeField] Transform head;        // la Main Camera du XR Origin
 
     public void TakeDamage(float damage)
     {
