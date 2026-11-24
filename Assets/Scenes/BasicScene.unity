@@ -11768,7 +11768,7 @@ Transform:
   m_GameObject: {fileID: 396228941}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.021265455, y: -0.0015772468, z: -0.29642946}
+  m_LocalPosition: {x: 0.021, y: 0.191, z: 0.008}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12936,15 +12936,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.8000001
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.8000001
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.8000001
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18014,6 +18014,8 @@ MonoBehaviour:
   hapticAmplitude: 0.6
   hapticDuration: 0.08
   bulletPrefab: {fileID: -4349570615998661128, guid: 5a05808367ca70b44b5637a8a0b1a76c, type: 3}
+  hitscan: 1
+  range: 150
 --- !u!64 &592392367
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -32168,6 +32170,7 @@ MonoBehaviour:
   maxSpawnDistance: 45
   minCoverDistance: 7
   maxCoverDistance: 20
+  maxHeightAboveGround: 1
 --- !u!4 &1089580099
 Transform:
   m_ObjectHideFlags: 0
@@ -75821,7 +75824,7 @@ Transform:
   m_GameObject: {fileID: 1828998529}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0060948157, y: 0.027662242, z: -0.40524483}
+  m_LocalPosition: {x: 0.006, y: 0.31, z: -0.001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -85049,7 +85052,7 @@ Transform:
   m_GameObject: {fileID: 12565990054507912}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 1.131, y: 1.404011, z: 20.027737}
+  m_LocalPosition: {x: 1.131, y: 1.404011, z: 19.784}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -85458,6 +85461,8 @@ MonoBehaviour:
   hapticAmplitude: 0.6
   hapticDuration: 0.08
   bulletPrefab: {fileID: -4349570615998661128, guid: 5a05808367ca70b44b5637a8a0b1a76c, type: 3}
+  hitscan: 1
+  range: 150
   pelletsPerShot: 8
   spreadAngle: 6
 --- !u!114 &4379943646230503577
@@ -85668,6 +85673,8 @@ MonoBehaviour:
   hapticAmplitude: 0.6
   hapticDuration: 0.08
   bulletPrefab: {fileID: -4349570615998661128, guid: 5a05808367ca70b44b5637a8a0b1a76c, type: 3}
+  hitscan: 1
+  range: 150
   roundsPerSecond: 9
 --- !u!114 &4814397531174321014
 MonoBehaviour:
