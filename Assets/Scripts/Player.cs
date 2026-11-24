@@ -1,96 +1,72 @@
+using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using TMPro;
 
-// =====================================================================
-//  Player ñ vie du joueur, position de la tÍte, affichage et Game Over
-//  ¿ placer sur la racine ´ XR Origin (XR Rig) ª.
-// =====================================================================
+// Joueur : points de vie, r√©g√©n√©ration, mort.
+// Plac√© sur la racine du XR Origin. "head" pointe vers la Main Camera.
 public class Player : MonoBehaviour
 {
-    [SerializeField] float health = 100f;
-    [Tooltip("La Main Camera du XR Origin (= la tÍte du joueur)")]
+    [SerializeField] float health;
+    [SerializeField] float maxHealth = 100f;
     [SerializeField] Transform head;
 
-    [Header("Affichage (facultatif)")]
-    [Tooltip("Texte TextMeshPro qui affiche la vie, par exemple sur la manette gauche")]
-    [SerializeField] TMP_Text healthText;
+    [Header("R√©g√©n√©ration")]
+    [SerializeField] float regenDelay = 4f;
+    [SerializeField] float regenPerSecond = 8f;
 
-    [Tooltip("Couleur normale du texte de vie")]
-    [SerializeField] Color normalColor = Color.white;
-    [Tooltip("Couleur du texte quand on est touchÈ")]
-    [SerializeField] Color hitColor = Color.red;
+    public event Action<float> Damaged;
+    public event Action Died;
 
-    [Header("Mort")]
-    [Tooltip("Secondes avant de relancer la partie aprËs la mort")]
-    [SerializeField] float restartDelay = 3f;
+    public float Health => health;
+    public float MaxHealth => maxHealth;
+    public bool IsDead { get; private set; }
 
-    private bool isDead;
-    public bool IsDead => isDead;
+    float lastDamageTime = -999f;
 
     private void Awake()
     {
         if (head == null && Camera.main != null)
             head = Camera.main.transform;
-        UpdateHealthText();
+        if (maxHealth <= 0f)
+            maxHealth = health > 0f ? health : 100f;
+        health = maxHealth;
+    }
+
+    private void Update()
+    {
+        if (IsDead || health >= maxHealth)
+            return;
+        if (Time.time - lastDamageTime >= regenDelay)
+            health = Mathf.Min(maxHealth, health + regenPerSecond * Time.deltaTime);
     }
 
     public void TakeDamage(float damage)
     {
-        if (isDead)
+        if (IsDead || damage <= 0f)
+            return;
+        if (GameManager.Instance != null && GameManager.Instance.State != GameState.Playing)
             return;
 
         health = Mathf.Max(0f, health - damage);
-        Debug.Log("Player health: " + health);
-        UpdateHealthText();
-        FlashHit();
+        lastDamageTime = Time.time;
+        Damaged?.Invoke(damage);
 
         if (health <= 0f)
-            Die();
+        {
+            IsDead = true;
+            Died?.Invoke();
+        }
+    }
+
+    public void ResetHealth()
+    {
+        IsDead = false;
+        health = maxHealth;
     }
 
     public Vector3 GetHeadPosition()
     {
-        return head.position;
+        return head != null ? head.position : transform.position + Vector3.up * 1.6f;
     }
 
-    private void Die()
-    {
-        isDead = true;
-        Debug.Log("GAME OVER");
-        if (healthText != null)
-        {
-            healthText.text = "GAME OVER";
-            healthText.color = hitColor;
-        }
-        Invoke(nameof(Restart), restartDelay);
-    }
-
-    private void Restart()
-    {
-        // La scËne doit Ítre dans File > Build Profiles > Scene List
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    // Le texte passe en rouge une fraction de seconde ‡ chaque tir reÁu
-    private void FlashHit()
-    {
-        if (healthText == null)
-            return;
-        healthText.color = hitColor;
-        CancelInvoke(nameof(ResetColor));
-        Invoke(nameof(ResetColor), 0.2f);
-    }
-
-    private void ResetColor()
-    {
-        if (healthText != null && !isDead)
-            healthText.color = normalColor;
-    }
-
-    private void UpdateHealthText()
-    {
-        if (healthText != null)
-            healthText.text = "Vie : " + Mathf.CeilToInt(health);
-    }
+    public Transform Head => head != null ? head : transform;
 }

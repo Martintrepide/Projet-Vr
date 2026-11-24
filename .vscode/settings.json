@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Projet-Vr.slnx"
+    "dotnet.defaultSolution": "Projet-Vr - Copie.slnx"
 }

@@ -161,6 +161,37 @@ Transform:
   - {fileID: 1002603818410118408}
   m_Father: {fileID: 7059785639305761140}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1034713871822344367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4082607988134486124}
+  m_Layer: 0
+  m_Name: ShootingPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4082607988134486124
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034713871822344367}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.25, y: 1.4, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3140707057749513571}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1085187807820861581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1613,6 +1644,7 @@ GameObject:
   - component: {fileID: 7804441130764997305}
   - component: {fileID: 5691631846465563251}
   - component: {fileID: 6213410300195938055}
+  - component: {fileID: 67487292808789401}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -1640,6 +1672,7 @@ Transform:
   - {fileID: 6174258375253709689}
   - {fileID: 4201734965396643416}
   - {fileID: 7070169818996196357}
+  - {fileID: 4082607988134486124}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &7804441130764997305
@@ -1677,23 +1710,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   startingHealth: 100
-  minTimeUnderCover: 5
-  maxTimeUnderCover: 8
-  minShotsToTake: 2
-  maxShotsToTake: 3
-  timeBetweenShots: 20
-  rotationSpeed: 1
-  damage: 5
-  shootingAccuracy: 20.5
-  shootWithAnimationEvent: 0
-  shootingPosition: {fileID: 0}
-  bloodSplatterFX: {fileID: 0}
+  minTimeUnderCover: 2
+  maxTimeUnderCover: 4
+  minShotsToTake: 3
+  maxShotsToTake: 6
+  rotationSpeed: 240
+  damage: 8
+  shootingAccuracy: 35
+  shootingPosition: {fileID: 4082607988134486124}
+  bloodSplatterFX: {fileID: 19886758, guid: 8c27aeead6d968e4ba986702d6b84335, type: 3}
+  shotInterval: 0.5
   muzzleFlashFX: {fileID: 0}
-  tracerMaterial: {fileID: 0}
-  tracerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  tracerWidth: 0.02
-  tracerDuration: 0.08
-  arrivalTolerance: 0.5
+  showTracers: 1
+  scoreValue: 100
 --- !u!195 &6213410300195938055
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1716,6 +1745,29 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &67487292808789401
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5128596947235482432}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Height: 1.8383946
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.91621757, z: 0}
 --- !u!1 &5285212505785201206
 GameObject:
   m_ObjectHideFlags: 0
